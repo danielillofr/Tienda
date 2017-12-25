@@ -7,6 +7,13 @@
 
 # dependencies
 /node_modules
+/functions
+/.firebaserc
+/database.rules.json
+/firebase.json
+/firestore.indexes.json
+/firestore.rules
+/storage.rules
 
 # IDEs and editors
 /.idea
