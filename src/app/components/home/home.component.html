@@ -1,3 +1,32 @@
+<!-- Botones de acceso -->
+
+<hr>
+<div class="row">
+  <div class="col-md">
+    <button type="button" class="btn btn-primary btn-lg btn-block puntero">Juguetes</button>
+  </div>
+  <div class="col-md">
+    <button type="button" class="btn btn-secondary btn-lg btn-block puntero">Droguería</button>
+  </div>
+  <div class="col-md">
+    <button type="button" class="btn btn-success btn-lg btn-block puntero">Menaje</button>
+  </div>
+  <div class="col-md">
+    <button type="button" class="btn btn-danger btn-lg btn-block puntero">Papelería</button>
+  </div>
+  <div class="col-md">
+    <button type="button" class="btn btn-warning btn-lg btn-block puntero">Otras cosas...</button>
+  </div>
+</div>
+<hr>
+<!-- Fin Botones de acceso -->
+<!-- Barra info -->
+<app-barra-info></app-barra-info>
+<!-- Fin Barra info -->
+
+<!-- Listado de articulos -->
+
+<hr>
 <div class="card-columns">
   <div class="card">
     <img class="card-img-top" src="assets/images/nenuco_400x400.jpg" alt="Nenuco">
@@ -80,3 +109,28 @@
     </div>
   </div>
 </div>
+
+<!-- Fin Listado de articulos -->
+
+<!-- BORRAR HASTA EL FINAL -->
+
+<div *ngIf="categorias">
+  <p *ngFor="let categoria of categorias">
+    {{categoria}}
+  </p>
+
+</div>
+<hr>
+<div *ngIf="subCategorias">
+  <p *ngFor="let subCategoria of subCategorias">
+    {{subCategoria}}
+  </p>
+
+</div>
+
+<button (click)="Editar_articulos()" class="btn btn-primary">Editar articulos</button>
+
+<button (click)="guardar()">Añadir</button>
+
+<!-- <input class="form-control" name="fichero" [(ngModel)]="fichero" type="file" id="fichero">
+<button (click)="Subir()">Subir</button> -->

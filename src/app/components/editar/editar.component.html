@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Referencia</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Disponible</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let articulo of articulos">
+            <th scope="row">1</th>
+            <td>{{articulo.descripcion}}</td>
+            <td>{{articulo.categoria}}</td>
+            <td>{{articulo.disponible}}</td>
+            <td><button (click)="Editar_articulo(articulo)" class="btn btn-primary">Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <div class="container" *ngIf="articuloEditar">
+        <form>
+          <h3>Editar articulo:{{articuloEditar.id}}</h3>
+          <div class="form-group">
+            <label for="referencia">Referencia:</label>
+            <input type="text" class="form-control" placeholder="Referencia" name="referencia" [(ngModel)]="articuloEditar.ref">
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" [(ngModel)]="articuloEditar.descripcion">
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md text-center">
+              <img [src]="articuloEditar.urlImagen | sinImagen:uploading" class="img-fluid pull-xs-left" alt="...">
+            </div>
+          </div>
+          <div *ngIf="uploading" class="progress">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': progreso + '%' }"></div>
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="col-md">
+              <input class="form-control" name="fichero" [(ngModel)]="fichero" type="file" id="fichero">
+            </div>
+            <div class="col-md">
+              <button class="btn btn-primary btn-block"  (click)="Subir()">Cambiar imagen</button>
+            </div>
+          </div>
+
+          <br>
+          <hr>
+
+          <button (click)="Actualizar()" type="submit" class="btn btn-success btn-block">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
