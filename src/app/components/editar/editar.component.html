@@ -1,23 +1,33 @@
-<div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 text-center">
+      <button (click)="Nuevo_articulo()" class="btn btn-success puntero">Nuevo artículo</button>
+      <br>
+      <br>
       <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Referencia</th>
+            <th scope="col">Titulo</th>
             <th scope="col">Categoria</th>
+            <th scope="col">Subcategoria</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Precio</th>
             <th scope="col">Disponible</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let articulo of articulos">
-            <th scope="row">1</th>
-            <td>{{articulo.descripcion}}</td>
+          <tr *ngFor="let articulo of articulos;let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{articulo.ref}}</td>
+            <td>{{articulo.titulo}}</td>
             <td>{{articulo.categoria}}</td>
-            <td>{{articulo.disponible}}</td>
-            <td><button (click)="Editar_articulo(articulo)" class="btn btn-primary">Editar</button></td>
+            <td>{{articulo.subcategoria}}</td>
+            <td><p *ngIf="articulo.urlImagen != ''">Cargada</p></td>
+            <td>{{articulo.precio | currency}}</td>
+            <td><p *ngIf="articulo.disponible">SI</p></td>
+            <td><button (click)="Editar_articulo(articulo)" class="btn btn-primary puntero">Editar</button></td>
           </tr>
         </tbody>
       </table>
@@ -34,6 +44,41 @@
             <label for="descripcion">Descripción:</label>
             <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" [(ngModel)]="articuloEditar.descripcion">
           </div>
+          <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="articuloEditar.titulo">
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md">
+            <label for="categoria">Categoria:</label>
+             <select class="custom-select" [(ngModel)]="articuloEditar.categoria" name="categoria" (change)="Cambio_categoria()">
+               <option *ngFor="let catItem of categorias" [value]="catItem">{{catItem}}</option>
+             </select>
+            </div>
+            <div class="col-md">
+              <label for="subcategoria">Subcategoria:</label>
+             <select class="custom-select" [(ngModel)]="articuloEditar.subcategoria" name="subcategoria">
+               <option *ngFor="let subcatItem of subcategorias" [value]="subcatItem">{{subcatItem}}</option>
+             </select>
+           </div>
+         </div>
+          <hr>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="text" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="articuloEditar.precio">
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="customCheck1" [(ngModel)]="articuloEditar.disponible" name="disponible">
+                <label class="custom-control-label" for="customCheck1">Disponible</label>
+              </div>
+            </div>
+          </div>
+          <br>
           <hr>
           <div class="row">
             <div class="col-md text-center">
@@ -50,16 +95,21 @@
               <input class="form-control" name="fichero" [(ngModel)]="fichero" type="file" id="fichero">
             </div>
             <div class="col-md">
-              <button class="btn btn-primary btn-block"  (click)="Subir()">Cambiar imagen</button>
+              <button class="btn btn-primary btn-block puntero"  (click)="Subir()">Cambiar imagen</button>
             </div>
           </div>
 
           <br>
           <hr>
-
-          <button (click)="Actualizar()" type="submit" class="btn btn-success btn-block">Actualizar</button>
+          <div class="row">
+            <div class="col-md">
+              <button (click)="Actualizar()" type="submit" class="btn btn-success btn-block puntero">Actualizar</button>
+            </div>
+            <div class="col-md">
+              <button (click)="Eliminar()" class="btn btn-danger btn-block puntero">Eliminar</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>
   </div>
-</div>

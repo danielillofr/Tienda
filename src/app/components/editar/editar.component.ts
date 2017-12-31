@@ -6,8 +6,7 @@ import * as firebase from "firebase";
 
 @Component({
   selector: 'app-editar',
-  templateUrl: './editar.component.html',
-  styleUrls: ['./editar.component.css']
+  templateUrl: './editar.component.html'
 })
 export class EditarComponent implements OnInit {
 
@@ -15,6 +14,10 @@ export class EditarComponent implements OnInit {
   articuloEditar:articuloId = null;
   progreso:number = 0;
   uploading:boolean = false;
+
+  categorias: string[] = [];
+  subcategorias: string[] = [];
+
 
   constructor(private _as:ArticulosService) {
     _as.getArticulos().subscribe(data=>
@@ -26,7 +29,54 @@ export class EditarComponent implements OnInit {
    Editar_articulo (art:articuloId)
    {
      console.log (`Articulo:${art.id}`);
+     this.categorias = this._as.getCategorias();
+     this.subcategorias = this._as.getSubCategorias(art.categoria);
      this.articuloEditar = art;
+   }
+
+   Nuevo_articulo ()
+   {
+     let artNuevo:articulo = {
+       ref : "",
+       titulo: "",
+       descripcion: "",
+       categoria: "Juguetes",
+       subcategoria :"",
+       urlImagen: "",
+       precio: 0,
+       disponible: false
+      };
+       this._as.crearArticulo(artNuevo)
+       .then(data=>{
+         console.log(data.id);
+         this.articuloEditar = {
+           ref : "",
+           titulo: "",
+           descripcion: "",
+           categoria: "Juguetes",
+           subcategoria :"",
+           urlImagen: "",
+           precio: 0,
+           disponible: false,
+           id : data.id
+         };
+         this.categorias = this._as.getCategorias();
+         this.subcategorias = this._as.getSubCategorias("Juguetes");
+       }
+     );
+
+     }
+
+   Cambio_categoria()
+   {
+     console.log("Cambio");
+     this.subcategorias = this._as.getSubCategorias(this.articuloEditar.categoria);
+   }
+
+   Eliminar()
+   {
+     this._as.eliminarActa(this.articuloEditar.id);
+     this.articuloEditar=null;
    }
   ngOnInit() {
   }
@@ -57,5 +107,6 @@ export class EditarComponent implements OnInit {
   {
     this._as.actualizarArticulo(this.articuloEditar);
     this.articuloEditar = null;
+    console.log(this.articuloEditar);
   }
 }

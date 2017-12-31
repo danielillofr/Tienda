@@ -13,13 +13,13 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BarraIntermediaComponent } from './components/barra-intermedia/barra-intermedia.component';
-import { BarraInfoComponent } from './components/barra-info/barra-info.component';
 
 import {ArticulosService} from './services/articulos.service';
 
 import {app_routing} from './app.routes';
 import { EditarComponent } from './components/editar/editar.component';
 import { SinImagenPipe } from './pipes/sin-imagen.pipe';
+import { HomeInfoComponent } from './components/home/home-info.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +27,9 @@ import { SinImagenPipe } from './pipes/sin-imagen.pipe';
     HomeComponent,
     NavbarComponent,
     BarraIntermediaComponent,
-    BarraInfoComponent,
     EditarComponent,
-    SinImagenPipe
+    SinImagenPipe,
+    HomeInfoComponent
   ],
   imports: [
     BrowserModule,

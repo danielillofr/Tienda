@@ -1,8 +1,10 @@
 export interface articulo
 {
   ref: string,
+  titulo: string,
   descripcion: string,
-  categoria:string,
+  categoria: string,
+  subcategoria: string,
   urlImagen: string,
   precio: number,
   disponible: boolean

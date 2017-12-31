@@ -35,8 +35,10 @@ export class ArticulosService {
   {
     let articuloAct : articulo = {
       ref: art.ref,
+      titulo: art.titulo,
       descripcion: art.descripcion,
       categoria:art.categoria,
+      subcategoria:art.subcategoria,
       urlImagen: art.urlImagen,
       precio: art.precio,
       disponible: art.disponible
@@ -71,7 +73,7 @@ export class ArticulosService {
     let subCategorias:string[] = [];
     switch(categoria){
       case "Juguetes":{
-          subCategorias.push("Jug1");
+          subCategorias.push("Coches");
           subCategorias.push("Jug2");
           subCategorias.push("Jug3");
           subCategorias.push("Jug4");
@@ -86,7 +88,7 @@ export class ArticulosService {
       }break;
       case "Menaje":{
           subCategorias.push("Men1");
-          subCategorias.push("Men2");
+          subCategorias.push("Joyas");
           subCategorias.push("Men3");
           subCategorias.push("Men4");
           subCategorias.push("Men5");

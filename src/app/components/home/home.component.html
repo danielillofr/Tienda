@@ -21,116 +21,36 @@
 <hr>
 <!-- Fin Botones de acceso -->
 <!-- Barra info -->
-<app-barra-info></app-barra-info>
+<app-home-info></app-home-info>
 <!-- Fin Barra info -->
 
 <!-- Listado de articulos -->
 
 <hr>
-<div class="card-columns">
-  <div class="card">
-    <img class="card-img-top" src="assets/images/nenuco_400x400.jpg" alt="Nenuco">
-    <div class="card-body">
-      <h4 class="card-title">Nenuco merienditas</h4>
-      <p class="card-text">Esta nenuco trae un montón de cosas</p>
-      <p class="card-text"><small class="text-muted">Precio: 59.99€</small></p>
+<div class="card-columns" *ngIf="articulos">
+  <div class="card" *ngFor="let articulo of articulos">
+    <div *ngIf="articulo.disponible">
+      <img class="card-img-top" [src]="articulo.urlImagen | sinImagen" [alt]="articulo.ref">
+      <div class="card-body">
+        <h4 class="card-title">{{articulo.titulo}}</h4>
+        <p class="card-text">{{articulo.descripcion}}</p>
+        <p class="card-text"><small class="text-muted">Precio: {{articulo.precio | currency}}</small></p>
+      </div>
     </div>
   </div>
-  <div class="card">
+  <!-- <div class="card">
     <img class="card-img-top" src="assets/images/playmobilColegio_400x248.jpg" alt="Nenuco">
     <div class="card-body">
       <h4 class="card-title">Colegio playmobil</h4>
       <p class="card-text">Este es el colegio de playmobil</p>
       <p class="card-text"><small class="text-muted">Precio: 29.99€</small></p>
     </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/pinypon_400x240.jpg" alt="Nenuco">
-    <div class="card-body">
-      <h4 class="card-title">Casa de pinypon</h4>
-      <p class="card-text">Esta es la nueva casa de pinypon, muy chula</p>
-      <p class="card-text"><small class="text-muted">Precio: 69.99€</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/pinypon_400x240.jpg" alt="Casa de pinypon">
-    <div class="card-body">
-      <h4 class="card-title">Casa de pinypon</h4>
-      <p class="card-text">Esta es la nueva casa de pinypon, muy chula</p>
-      <p class="card-text"><small class="text-muted">Precio: 69.99€</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/casa_playmobil_400x280.jpg" alt="Casa de pinypon">
-    <div class="card-body">
-      <h4 class="card-title">Casa de playmobil</h4>
-      <p class="card-text">Esta es la nueva casa de playmobil, también muy chula</p>
-      <p class="card-text"><small class="text-muted">Precio: 39.99€</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/casa_playmobil_400x280.jpg" alt="Nenuco">
-    <div class="card-body">
-      <h4 class="card-title">Casa de playmobil</h4>
-      <p class="card-text">Esta es la nueva casa de playmobil, también muy chula</p>
-      <p class="card-text"><small class="text-muted">Precio: 39.99€</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/nenuco_400x400.jpg" alt="Nenuco">
-    <div class="card-body">
-      <h4 class="card-title">Nenuco merienditas</h4>
-      <p class="card-text">Esta nenuco trae un montón de cosas</p>
-      <p class="card-text"><small class="text-muted">Precio: 59.99€</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/playmobilColegio_400x248.jpg" alt="Nenuco">
-    <div class="card-body">
-      <h4 class="card-title">Colegio playmobil</h4>
-      <p class="card-text">Este es el colegio de playmobil</p>
-      <p class="card-text"><small class="text-muted">Precio: 29.99€</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/casa_playmobil_400x280.jpg" alt="Casa de pinypon">
-    <div class="card-body">
-      <h4 class="card-title">Casa de playmobil</h4>
-      <p class="card-text">Esta es la nueva casa de playmobil, también muy chula</p>
-      <p class="card-text"><small class="text-muted">Precio: 39.99€</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="assets/images/casa_playmobil_400x280.jpg" alt="Nenuco">
-    <div class="card-body">
-      <h4 class="card-title">Casa de playmobil</h4>
-      <p class="card-text">Esta es la nueva casa de playmobil, también muy chula</p>
-      <p class="card-text"><small class="text-muted">Precio: 39.99€</small></p>
-    </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- Fin Listado de articulos -->
 
 <!-- BORRAR HASTA EL FINAL -->
 
-<div *ngIf="categorias">
-  <p *ngFor="let categoria of categorias">
-    {{categoria}}
-  </p>
-
-</div>
-<hr>
-<div *ngIf="subCategorias">
-  <p *ngFor="let subCategoria of subCategorias">
-    {{subCategoria}}
-  </p>
-
-</div>
 
 <button (click)="Editar_articulos()" class="btn btn-primary">Editar articulos</button>
-
-<button (click)="guardar()">Añadir</button>
-
-<!-- <input class="form-control" name="fichero" [(ngModel)]="fichero" type="file" id="fichero">
-<button (click)="Subir()">Subir</button> -->
