@@ -20,6 +20,8 @@ import {app_routing} from './app.routes';
 import { EditarComponent } from './components/editar/editar.component';
 import { SinImagenPipe } from './pipes/sin-imagen.pipe';
 import { HomeInfoComponent } from './components/home/home-info.component';
+import { FitroEditarPipe } from './pipes/fitro-editar.pipe';
+import { FitroCategoriasHomePipe } from './pipes/fitro-categorias-home.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { HomeInfoComponent } from './components/home/home-info.component';
     BarraIntermediaComponent,
     EditarComponent,
     SinImagenPipe,
-    HomeInfoComponent
+    HomeInfoComponent,
+    FitroEditarPipe,
+    FitroCategoriasHomePipe
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ export interface articulo
   descripcion: string,
   categoria: string,
   subcategoria: string,
+  imagen: string,
   urlImagen: string,
   precio: number,
   disponible: boolean

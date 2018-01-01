@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ArticulosService} from '../../services/articulos.service';
 import {articulo,articuloId} from '../../interfaces/articulo.interface';
 import * as firebase from "firebase";
-import {Router} from '@angular/router';
+import {ActivatedRoute,Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +15,20 @@ export class HomeComponent implements OnInit {
 
   articulos: articuloId[] = [];
 
-  constructor(private _as:ArticulosService,private _rt:Router) {
+  categoria:string = "";
+
+  constructor(private _as:ArticulosService,private _rt:Router,_ar:ActivatedRoute) {
     _as.getArticulos().subscribe(data=>{
       this.articulos = data;
+    });
+    _ar.params.subscribe(params=>{
+      if (params["categoria"])
+      {
+        this.categoria = params["categoria"];
+        console.log(this.categoria)
+      }else{
+        this.categoria = "";
+      }
     });
 
    }

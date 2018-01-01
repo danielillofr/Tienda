@@ -4,6 +4,7 @@ import {EditarComponent} from './components/editar/editar.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'home/:categoria', component: HomeComponent },
   { path: 'editar', component: EditarComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

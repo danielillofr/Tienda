@@ -17,19 +17,31 @@ export class EditarComponent implements OnInit {
 
   categorias: string[] = [];
   subcategorias: string[] = [];
+  subcategoriasFiltro: string[] = [];
 
+  filtroCategoria:string = "";
+  filtroSubcategoria:string="";
+
+  busqueda:string = "";
 
   constructor(private _as:ArticulosService) {
     _as.getArticulos().subscribe(data=>
     {
+      this.categorias = this._as.getCategorias();
       this.articulos = data;
       console.log(data);
     });
    }
+
+   Cambio_categoriaFiltro()
+   {
+     console.log(this.filtroCategoria);
+     this.subcategoriasFiltro = this._as.getSubCategorias(this.filtroCategoria);
+   }
+
    Editar_articulo (art:articuloId)
    {
      console.log (`Articulo:${art.id}`);
-     this.categorias = this._as.getCategorias();
      this.subcategorias = this._as.getSubCategorias(art.categoria);
      this.articuloEditar = art;
    }
@@ -42,6 +54,7 @@ export class EditarComponent implements OnInit {
        descripcion: "",
        categoria: "Juguetes",
        subcategoria :"",
+       imagen:"",
        urlImagen: "",
        precio: 0,
        disponible: false
@@ -55,6 +68,7 @@ export class EditarComponent implements OnInit {
            descripcion: "",
            categoria: "Juguetes",
            subcategoria :"",
+           imagen:"",
            urlImagen: "",
            precio: 0,
            disponible: false,
@@ -98,6 +112,7 @@ export class EditarComponent implements OnInit {
       ( )=>{
         console.log(uploadTask.snapshot.downloadURL) ;
         this.articuloEditar.urlImagen = uploadTask.snapshot.downloadURL;
+        this.articuloEditar.imagen = ficherito.files[0].name;
         this.uploading = false;
       }
 

@@ -39,6 +39,7 @@ export class ArticulosService {
       descripcion: art.descripcion,
       categoria:art.categoria,
       subcategoria:art.subcategoria,
+      imagen:art.imagen,
       urlImagen: art.urlImagen,
       precio: art.precio,
       disponible: art.disponible

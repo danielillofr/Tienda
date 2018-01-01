@@ -3,10 +3,10 @@
 <hr>
 <div class="row">
   <div class="col-md">
-    <button type="button" class="btn btn-primary btn-lg btn-block puntero">Juguetes</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block puntero" [routerLink]="['/home','juguetes']" >Juguetes</button>
   </div>
   <div class="col-md">
-    <button type="button" class="btn btn-secondary btn-lg btn-block puntero">Droguería</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block puntero" [routerLink]="['/home','drogueria']">Droguería</button>
   </div>
   <div class="col-md">
     <button type="button" class="btn btn-success btn-lg btn-block puntero">Menaje</button>
@@ -28,7 +28,7 @@
 
 <hr>
 <div class="card-columns" *ngIf="articulos">
-  <div class="card" *ngFor="let articulo of articulos">
+  <div class="card" *ngFor="let articulo of (articulos | fitroCategoriasHome:categoria)">
     <div *ngIf="articulo.disponible">
       <img class="card-img-top" [src]="articulo.urlImagen | sinImagen" [alt]="articulo.ref">
       <div class="card-body">
