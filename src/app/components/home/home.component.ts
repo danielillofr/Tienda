@@ -3,6 +3,7 @@ import {ArticulosService} from '../../services/articulos.service';
 import {articulo,articuloId} from '../../interfaces/articulo.interface';
 import * as firebase from "firebase";
 import {ActivatedRoute,Router} from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,11 @@ export class HomeComponent implements OnInit {
 
   categoria:string = "";
 
+  paginado : any;
+
   constructor(private _as:ArticulosService,private _rt:Router,_ar:ActivatedRoute) {
-    _as.getArticulos().subscribe(data=>{
-      this.articulos = data;
-    });
+    _as.getArticulos("",3);
+
     _ar.params.subscribe(params=>{
       if (params["categoria"])
       {
@@ -40,6 +42,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  next()
+  {
+    this._as.next();
+  }
+  prev()
+  {
+    this._as.prev();
   }
 
 }

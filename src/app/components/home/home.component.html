@@ -28,7 +28,8 @@
 
 <hr>
 <div class="card-columns" *ngIf="articulos">
-  <div class="card" *ngFor="let articulo of (articulos | fitroCategoriasHome:categoria)">
+  <!-- <div class="card" *ngFor="let articulo of (articulos | fitroCategoriasHome:categoria)"> -->
+  <div class="card" *ngFor="let articulo of _as.articulos">
     <div *ngIf="articulo.disponible">
       <img class="card-img-top" [src]="articulo.urlImagen | sinImagen" [alt]="articulo.ref">
       <div class="card-body">
@@ -52,5 +53,12 @@
 
 <!-- BORRAR HASTA EL FINAL -->
 
+
+<div class="row">
+  <div class="col-md text-center">
+    <button (click)="prev()" [disabled]="!(_as.showPrev)" class="btn btn-primary puntero">prev</button>
+    <button (click)="next()" [disabled]="!(_as.showNext)" class="btn btn-primary puntero">Next</button>
+  </div>
+</div>
 
 <button (click)="Editar_articulos()" class="btn btn-primary">Editar articulos</button>

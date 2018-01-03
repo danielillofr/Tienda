@@ -25,12 +25,7 @@ export class EditarComponent implements OnInit {
   busqueda:string = "";
 
   constructor(private _as:ArticulosService) {
-    _as.getArticulos().subscribe(data=>
-    {
-      this.categorias = this._as.getCategorias();
-      this.articulos = data;
-      console.log(data);
-    });
+    _as.getArticulos("",0);
    }
 
    Cambio_categoriaFiltro()

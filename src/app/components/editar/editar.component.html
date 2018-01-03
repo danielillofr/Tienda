@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let articulo of (articulos | fitroEditar:{c:filtroCategoria, s:filtroSubcategoria, b:busqueda});let i=index">
+          <tr *ngFor="let articulo of (_as.articulos | fitroEditar:{c:filtroCategoria, s:filtroSubcategoria, b:busqueda});let i=index">
             <th scope="row">{{i+1}}</th>
             <td>{{articulo.ref}}</td>
             <td>{{articulo.titulo}}</td>
