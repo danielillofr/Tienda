@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyCTELKxjGbYC14MtfL5N7UYwFpEDO-5CSg",
-    authDomain: "tienda-56a2b.firebaseapp.com",
-    databaseURL: "https://tienda-56a2b.firebaseio.com",
-    projectId: "tienda-56a2b",
-    storageBucket: "tienda-56a2b.appspot.com",
-    messagingSenderId: "345582759418"
+    apiKey: "AIzaSyDL0Sd61g32V5COocZ7AD29XqdgioemSsQ",
+    authDomain: "tienda-b628a.firebaseapp.com",
+    databaseURL: "https://tienda-b628a.firebaseio.com",
+    projectId: "tienda-b628a",
+    storageBucket: "tienda-b628a.appspot.com",
+    messagingSenderId: "74207214441"
   }
 };
