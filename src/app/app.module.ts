@@ -22,6 +22,7 @@ import { SinImagenPipe } from './pipes/sin-imagen.pipe';
 import { HomeInfoComponent } from './components/home/home-info.component';
 import { FitroEditarPipe } from './pipes/fitro-editar.pipe';
 import { FitroCategoriasHomePipe } from './pipes/fitro-categorias-home.pipe';
+import { PaginacionPipe } from './pipes/paginacion.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FitroCategoriasHomePipe } from './pipes/fitro-categorias-home.pipe';
     SinImagenPipe,
     HomeInfoComponent,
     FitroEditarPipe,
-    FitroCategoriasHomePipe
+    FitroCategoriasHomePipe,
+    PaginacionPipe
   ],
   imports: [
     BrowserModule,

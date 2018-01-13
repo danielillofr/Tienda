@@ -3,10 +3,10 @@
 <hr>
 <div class="row">
   <div class="col-md">
-    <button type="button" class="btn btn-primary btn-lg btn-block puntero" [routerLink]="['/home','juguetes']" >Juguetes</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block puntero" [routerLink]="['/home','Juguetes']" >Juguetes</button>
   </div>
   <div class="col-md">
-    <button type="button" class="btn btn-secondary btn-lg btn-block puntero" [routerLink]="['/home','drogueria']">Droguería</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block puntero" [routerLink]="['/home','Drogueria']">Droguería</button>
   </div>
   <div class="col-md">
     <button type="button" class="btn btn-success btn-lg btn-block puntero">Menaje</button>
@@ -29,7 +29,7 @@
 <hr>
 <div class="card-columns" *ngIf="articulos">
   <!-- <div class="card" *ngFor="let articulo of (articulos | fitroCategoriasHome:categoria)"> -->
-  <div class="card" *ngFor="let articulo of _as.articulos">
+  <div class="card" *ngFor="let articulo of articulos">
     <div *ngIf="articulo.disponible">
       <img class="card-img-top" [src]="articulo.urlImagen | sinImagen" [alt]="articulo.ref">
       <div class="card-body">
@@ -61,4 +61,4 @@
   </div>
 </div>
 
-<button (click)="Editar_articulos()" class="btn btn-primary">Editar articulos</button>
+<!-- <button (click)="Editar_articulos()" class="btn btn-primary">Editar articulos</button> -->

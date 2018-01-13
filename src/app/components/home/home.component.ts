@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   paginado : any;
 
   constructor(private _as:ArticulosService,private _rt:Router,_ar:ActivatedRoute) {
-    _as.getArticulos("",3);
 
     _ar.params.subscribe(params=>{
       if (params["categoria"])
@@ -31,6 +30,8 @@ export class HomeComponent implements OnInit {
       }else{
         this.categoria = "";
       }
+      // _as.getArticulos(this.categoria,3);
+       _as.getArticulos(this.categoria,20,true).subscribe(data=>{this.articulos=data});
     });
 
    }
@@ -46,11 +47,11 @@ export class HomeComponent implements OnInit {
 
   next()
   {
-    this._as.next();
+    this._as.next().subscribe(data=>{this.articulos=data});
   }
   prev()
   {
-    this._as.prev();
+    this._as.prev().subscribe(data=>{this.articulos=data});
   }
 
 }

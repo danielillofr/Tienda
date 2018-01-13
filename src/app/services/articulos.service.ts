@@ -11,11 +11,12 @@ import { Subscription } from 'rxjs/Subscription';
 @Injectable()
 export class ArticulosService {
 
-  articulos: articulo[] = [];
+  articulos: articuloId[] = [];
 
   articulosObservable : Observable<articuloId[]>;
 
   elemPorPag: number = 3;
+  soloDisponibles:boolean = false;
 
   prevDoc:any;
   lastDoc:any;
@@ -29,27 +30,31 @@ export class ArticulosService {
 
   constructor(private af: AngularFirestore, public afAuth:AngularFireAuth ) { }
 
-  getArticulos(categoria:string, elemPorPag:number){
+  getArticulos(categoria:string, elemPorPag:number,soloDisponibles:boolean){
     this.articulos = [];
     this.categoria = categoria;
     this.elemPorPag = elemPorPag;
+    this.soloDisponibles = soloDisponibles;
     this.showPrev = false;
     this.showNext = false;
-    this.inicioObs = this.af.collection<articulo>('articulos', ref => {
+    return this.af.collection<articulo>('articulos', ref => {
         let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
         query = query.orderBy('ref');
         if (categoria != "")
         {
           query = query.where('categoria', '==',categoria);
         }
+        if (this.soloDisponibles)
+        {
+          query = query.where('disponible', '==', true);
+        }
         if (this.elemPorPag)
         {
           query = query.limit(elemPorPag + 1);//Incrementamos uno para saber que hay más páginas
         }
         return query;
-      }).snapshotChanges();
+      }).snapshotChanges().map(data=>{
 
-      this.inicioObs.subscribe(data=>{
        if (data.length == (this.elemPorPag + 1))
        {
          this.showNext = true;
@@ -76,6 +81,7 @@ export class ArticulosService {
          }
        }
       console.log(this.articulos);
+      return this.articulos;
     });
   }
 
@@ -83,7 +89,7 @@ export class ArticulosService {
     this.articulos = [];
     this.showPrev = false;
     this.showNext = false;
-    this.af.collection<articulo>('articulos', ref => {
+    return this.af.collection<articulo>('articulos', ref => {
         let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
         query = query.orderBy('ref');
         query = query.startAt(this.lastDoc);
@@ -91,12 +97,16 @@ export class ArticulosService {
         {
           query = query.where('categoria', '==',this.categoria);
         }
+        if (this.soloDisponibles)
+        {
+          query = query.where('disponible', '==', true);
+        }
         if (this.elemPorPag)
         {
           query = query.limit(this.elemPorPag + 1);//Incrementamos uno para saber que hay más páginas
         }
         return query;
-      }).snapshotChanges().subscribe(data=>{
+      }).snapshotChanges().map(data=>{
        this.prevDocs.push(this.prevDoc);
        this.showPrev = true;
        if (data.length == (this.elemPorPag + 1))
@@ -125,6 +135,7 @@ export class ArticulosService {
          }
        }
       console.log(this.articulos);
+      return this.articulos;
     });
   }
 
@@ -133,7 +144,7 @@ export class ArticulosService {
     this.showPrev = false;
     this.showNext = false;
     this.prevDoc = this.prevDocs[this.prevDocs.length - 1];
-    this.af.collection<articulo>('articulos', ref => {
+    return this.af.collection<articulo>('articulos', ref => {
         let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
         query = query.orderBy('ref');
         query = query.startAt(this.prevDoc);
@@ -141,12 +152,16 @@ export class ArticulosService {
         {
           query = query.where('categoria', '==',this.categoria);
         }
+        if (this.soloDisponibles)
+        {
+          query = query.where('disponible', '==', true);
+        }
         if (this.elemPorPag)
         {
           query = query.limit(this.elemPorPag + 1);//Incrementamos uno para saber que hay más páginas
         }
         return query;
-      }).snapshotChanges().subscribe(data=>{
+      }).snapshotChanges().map(data=>{
         this.prevDocs.pop();
        if (this.prevDocs.length)
        {
@@ -178,6 +193,7 @@ export class ArticulosService {
          }
        }
       console.log(this.articulos);
+      return this.articulos;
     });
   }
 

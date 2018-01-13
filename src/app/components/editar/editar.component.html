@@ -1,6 +1,13 @@
   <div class="row">
     <div class="col-md-6 text-center">
       <div class="row">
+        <div class="col-md">
+          <button (click)="Nuevo_articulo()" class="btn btn-success puntero">Nuevo artículo</button>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row">
         <div class="col-md-6">
           <label for="filtroCategoria">Categoria:</label>
            <select class="custom-select" [(ngModel)]="filtroCategoria" name="filtroCategoria" (change)="Cambio_categoriaFiltro()">
@@ -10,33 +17,24 @@
         </div>
         <div class="col-md-6">
           <label for="filtroSubcategoria">Subcategoria:</label>
-         <select class="custom-select" [(ngModel)]="filtroSubcategoria" name="filtroSubcategoria">
+         <select class="custom-select" [(ngModel)]="filtroSubcategoria" name="filtroSubcategoria" (change)="Cambio_subCategoriaFiltro()">
            <option value="">Todas</option>
            <option *ngFor="let subcatItem of subcategoriasFiltro" [value]="subcatItem">{{subcatItem}}</option>
          </select>
         </div>
       </div>
 
-      <hr>
       <div class="row">
         <div class="col-md-1">
         </div>
-        <div class="col-md-3">
+        <div class="col-md-10">
           <div class="form-group">
             <label for="busqueda">Búsqueda:</label>
-            <input type="text" class="form-control" placeholder="Búsqueda" name="busqueda" [(ngModel)]="busqueda">
+            <input type="text" class="form-control" placeholder="Búsqueda" name="busqueda" [(ngModel)]="busqueda" (keyup)="Cambio_busqueda()">
           </div>
 
         </div>
       </div>
-<div class="row">
-  <div class="col-md-1">
-
-  </div>
-  <div class="col-md-3">
-    <button (click)="Nuevo_articulo()" class="btn btn-success puntero">Nuevo artículo</button>
-  </div>
-</div>
 
 
       <br>
@@ -55,7 +53,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let articulo of (_as.articulos | fitroEditar:{c:filtroCategoria, s:filtroSubcategoria, b:busqueda});let i=index">
+          <tr *ngFor="let articulo of (articulosFiltrados | paginacion:{pa:paginaActual, tp:elementosPorPagina});let i=index">
             <th scope="row">{{i+1}}</th>
             <td>{{articulo.ref}}</td>
             <td>{{articulo.titulo}}</td>
@@ -68,6 +66,14 @@
           </tr>
         </tbody>
       </table>
+      <div class="row" *ngIf="numeroPaginas != 0">
+        <div class="col-md text-center">
+          <button (click)="paginaActual = paginaActual - 1" [disabled]="paginaActual === 0" class="btn btn-primary puntero">prev</button>
+          {{paginaActual + 1}} de {{numeroPaginas}}
+          <button (click)="paginaActual = paginaActual + 1" [disabled]="paginaActual + 1 === numeroPaginas" class="btn btn-primary puntero">Next</button>
+        </div>
+      </div>
+
     </div>
     <div class="col-md-6">
       <div class="container" *ngIf="articuloEditar">
