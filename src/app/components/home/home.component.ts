@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   paginado : any;
 
-  constructor(private _as:ArticulosService,private _rt:Router,_ar:ActivatedRoute) {
+  constructor(public _as:ArticulosService,private _rt:Router,_ar:ActivatedRoute) {
 
     _ar.params.subscribe(params=>{
       if (params["categoria"])
